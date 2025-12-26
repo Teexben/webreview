@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Boma Villa Kilimanjaro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --primary-color: #1a472a;
+            --secondary-color: #d4af37;
+            --accent-color: #8b4513;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --background-light: #f8f5f0;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-Index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-link.active {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 70px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-padding {
+            padding: 5rem 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #b8941f;
+            transform: translateY(-2px);
+        }
+        
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* About Page Specific Styles */
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+        
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .mission-card {
+            padding: 2rem;
+            text-align: center;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--secondary-color);
+        }
+        
+        .values-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .value-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .story-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="Index.html" class="logo">Boma Villa Kilimanjaro</a>
+            <ul class="nav-menu">
+                <li><a href="Index.html" class="nav-link">Home</a></li>
+                <li><a href="rooms.html" class="nav-link">Rooms & Rates</a></li>
+                <li><a href="gallary.html" class="nav-link">Gallery</a></li>
+                <li><a href="contacts.html" class="nav-link">Contact</a></li>
+                <li><a href="about us.html" class="nav-link active">About Us</a></li>
+                <li><a href="review.html" class="nav-link">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Our Story</h1>
+            <p style="font-size: 1.2rem;">Discover the heritage behind Boma Villa Kilimanjaro</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="section-padding">
+        <div class="container">
+            <!-- Our Story -->
+            <div class="story-section">
+                <div>
+                    <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">A Legacy of Hospitality</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                        Founded in 2010 by the Mushi family, Boma Villa Kilimanjaro began as a vision to create a sanctuary 
+                        where travelers could experience authentic Tanzanian hospitality amidst the breathtaking beauty of 
+                        Mount Kilimanjaro.
+                    </p>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                        "Boma" in Swahili means a homestead or enclosure, reflecting our commitment to creating a warm, 
+                        welcoming environment where every guest feels at home. Over the years, we've grown from a small 
+                        family guesthouse to a premier luxury villa, all while maintaining our core values of hospitality, 
+                        sustainability, and cultural preservation.
+                    </p>
+                    <a href="contacts.html" class="btn">Get in Touch</a>
+                </div>
+                <div>
+                    <img src="/images/photo_2025-12-24_15-22-49.jpg" 
+                         alt="Villa Heritage" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                </div>
+            </div>
+
+            <!-- Mission & Vision -->
+            <div style="text-align: center; margin: 5rem 0;">
+                <h2 style="color: var(--primary-color); margin-bottom: 3rem;">Our Guiding Principles</h2>
+                <div class="mission-grid">
+                    <div class="mission-card">
+                        <h3 style="color: var(--secondary-color); margin-bottom: 1rem;">Our Mission</h3>
+                        <p>To provide exceptional hospitality that celebrates Tanzanian culture while offering world-class 
+                        comfort and unforgettable experiences to our guests, fostering meaningful connections between 
+                        travelers and our beautiful region.</p>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <h3 style="color: var(--secondary-color); margin-bottom: 1rem;">Our Vision</h3>
+                        <p>To be the premier destination for travelers seeking authentic Kilimanjaro experiences, setting 
+                        the standard for sustainable luxury tourism while preserving and promoting Tanzanian heritage 
+                        for generations to come.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Our Values -->
+            <div style="margin: 5rem 0;">
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 3rem;">Our Core Values</h2>
+                <div class="values-list">
+                    <div class="value-item">
+                        <div class="value-icon">🏔️</div>
+                        <h4>Respect for Nature</h4>
+                        <p>Sustainable practices preserving Kilimanjaro's beauty</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">❤️</div>
+                        <h4>Authentic Hospitality</h4>
+                        <p>Genuine Tanzanian warmth and care</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🎨</div>
+                        <h4>Cultural Heritage</h4>
+                        <p>Preserving and sharing local traditions</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">⭐</div>
+                        <h4>Excellence</h4>
+                        <p>Uncompromising quality in everything we do</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Section -->
+            <div style="margin: 5rem 0;">
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 3rem;">Meet Our Family</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="/images/maid one.jpg" 
+                             alt="James Mushi" class="team-img">
+                        <h4>James Mushi</h4>
+                        <p style="color: var(--secondary-color);">Founder & General Manager</p>
+                        <p>30+ years in hospitality</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="/images/maid one.jpg" 
+                             alt="Sarah Mushi" class="team-img">
+                        <h4>Sarah Mushi</h4>
+                        <p style="color: var(--secondary-color);">Hospitality Director</p>
+                        <p>Ensuring exceptional guest experiences</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="/images/maid one.jpg" 
+                             alt="David Kileo" class="team-img">
+                        <h4>David Kileo</h4>
+                        <p style="color: var(--secondary-color);">Head Chef</p>
+                        <p>Traditional & contemporary Tanzanian cuisine</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sustainability Section -->
+            <div class="card" style="padding: 3rem; text-align: center; background: linear-gradient(135deg, var(--primary-color), #0d351f); color: white;">
+                <h2 style="color: var(--secondary-color); margin-bottom: 1.5rem;">Our Commitment to Sustainability</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    We are dedicated to responsible tourism. Our eco-friendly practices include solar energy, 
+                    water conservation systems, sourcing from local farmers, and supporting community education 
+                    programs. 15% of our profits go back to local conservation and community development.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem;">
+                    <div>
+                        <h3 style="color: var(--secondary-color);">100%</h3>
+                        <p>Renewable Energy</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--secondary-color);">85%</h3>
+                        <p>Locally Sourced</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--secondary-color);">200+</h3>
+                        <p>Trees Planted</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@bomavillakilimanjaro.com</p>
+                    <p>Phone: +255 123 456 789</p>
+                    <p>Address: Moshi, Kilimanjaro Region, Tanzania</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="rooms.html" style="color: var(--white); text-decoration: none;">Rooms & Rates</a></li>
+                        <li><a href="gallary.html" style="color: var(--white); text-decoration: none;">Gallery</a></li>
+                        <li><a href="contacts.html" style="color: var(--white); text-decoration: none;">Contact</a></li>
+                        <li><a href="about us.html" style="color: var(--white); text-decoration: none;">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <p>Follow our journey on social media</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" style="color: var(--white); text-decoration: none;">Facebook</a>
+                        <a href="#" style="color: var(--white); text-decoration: none;">Instagram</a>
+                        <a href="#" style="color: var(--white); text-decoration: none;">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Boma Villa Kilimanjaro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set active navigation link
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Team member hover effect
+            const teamMembers = document.querySelectorAll('.team-member');
+            teamMembers.forEach(member => {
+                member.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                member.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Counter animation for sustainability stats
+            function animateCounter(element, target) {
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target + (element.textContent.includes('%') ? '%' : '+');
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current) + (element.textContent.includes('%') ? '%' : '+');
+                    }
+                }, 30);
+            }
+            
+            // Animate counters when they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counters = entry.target.querySelectorAll('h3');
+                        counters.forEach(counter => {
+                            const text = counter.textContent;
+                            const number = parseInt(text);
+                            if (!isNaN(number)) {
+                                counter.textContent = '0' + (text.includes('%') ? '%' : '+');
+                                animateCounter(counter, number);
+                            }
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            const sustainabilitySection = document.querySelector('.card');
+            if (sustainabilitySection) {
+                observer.observe(sustainabilitySection);
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

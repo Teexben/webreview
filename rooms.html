@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms & Rates - Boma Villa Kilimanjaro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #1a472a;
+            --secondary-color: #d4af37;
+            --accent-color: #8b4513;
+            --text-dark: #2c3e2f;
+            --text-light: #666666;
+            --background-light: #f8f5f0;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Premium Navigation */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-Index: 1000;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 20px;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 0.75rem 1.25rem;
+            position: relative;
+            font-size: 1rem;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link.active {
+            color: var(--secondary-color);
+        }
+        
+        .nav-link.active:after {
+            width: 100%;
+            left: 0;
+        }
+        
+        /* Premium Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            letter-spacing: -0.5px;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Premium Buttons */
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--secondary-color), #c19b2e);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        /* Premium Room Cards */
+        .rooms-section {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, var(--background-light) 0%, #f0ebe1 100%);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 1rem auto;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+        
+        .room-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .room-card:hover {
+            transform: translateY(-20px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .room-card.featured {
+            border: 3px solid var(--secondary-color);
+            transform: scale(1.05);
+        }
+        
+        .room-card.featured:hover {
+            transform: scale(1.05) translateY(-20px);
+        }
+        
+        .room-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-Index: 2;
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
+        
+        .room-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .room-card:hover .room-image img {
+            transform: scale(1.1);
+        }
+        
+        .room-content {
+            padding: 30px;
+        }
+        
+        .room-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .room-title h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .room-rating {
+            color: var(--secondary-color);
+            font-size: 1rem;
+        }
+        
+        .room-price {
+            text-align: right;
+        }
+        
+        .price-from {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+        
+        .price-amount {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+        
+        .price-period {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .room-description {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .feature {
+            background: var(--background-light);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .feature i {
+            color: var(--secondary-color);
+        }
+        
+        .room-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Comparison Table */
+        .comparison-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .comparison-table {
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, var(--primary-color), #0d351f);
+            color: var(--white);
+        }
+        
+        th {
+            padding: 25px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        th:first-child {
+            border-radius: 15px 0 0 0;
+        }
+        
+        th:last-child {
+            border-radius: 0 15px 0 0;
+        }
+        
+        td {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tbody tr:hover {
+            background-color: rgba(26, 71, 42, 0.03);
+        }
+        
+        .feature-check {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        /* Special Offers */
+        .offers-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(26, 71, 42, 0.05), rgba(212, 175, 55, 0.05));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .offer-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .offer-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            font-weight: 700;
+            border-radius: 0 0 0 15px;
+        }
+        
+        .offer-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .offer-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .offer-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .offer-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color), #0d351f);
+            color: var(--white);
+            padding: 80px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .rooms-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .room-card.featured {
+                transform: none;
+            }
+            
+            .room-card.featured:hover {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--primary-color);
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .room-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .room-price {
+                text-align: left;
+            }
+            
+            .btn {
+                padding: 14px 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .price-amount {
+                font-size: 1.8rem;
+            }
+            
+            .room-content {
+                padding: 20px;
+            }
+            
+            .offer-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Premium Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="Index.html" class="logo">Boma<span>Villa</span></a>
+            <ul class="nav-menu">
+                <li><a href="Index.html" class="nav-link">Home</a></li>
+                <li><a href="rooms.html" class="nav-link active">Rooms & Rates</a></li>
+                <li><a href="gallary.html" class="nav-link">Gallery</a></li>
+                <li><a href="contacts.html" class="nav-link">Contact</a></li>
+                <li><a href="about us.html" class="nav-link">About Us</a></li>
+                <li><a href="review.html" class="nav-link">Reviews</a></li>
+                <li><a href="contacts.html" class="btn" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Premium Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <h1>Luxury Accommodations</h1>
+            <p>Experience unparalleled comfort with breathtaking views of Mount Kilimanjaro. Each room is meticulously designed to blend traditional Tanzanian elegance with modern luxury.</p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="#rooms" class="btn">Explore Rooms</a>
+                <a href="#special-offers" class="btn btn-outline">View Special Offers</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section class="rooms-section" id="rooms">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our Accommodations</h2>
+                <p>Choose from our selection of beautifully appointed rooms and suites, each offering unique views and premium amenities.</p>
+            </div>
+            
+            <div class="rooms-grid">
+                <!-- Deluxe Mountain View Room -->
+                <div class="room-card fade-in">
+                    <div class="room-badge">Most Popular</div>
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Deluxe Mountain View Room">
+                    </div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div class="room-title">
+                                <h3>Deluxe Mountain View</h3>
+                                <div class="room-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="room-price">
+                                <div class="price-from">Starting from</div>
+                                <div class="price-amount">$220</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                        </div>
+                        
+                        <p class="room-description">
+                            Wake up to breathtaking views of Mount Kilimanjaro from your private balcony. This spacious room features a king-size bed and elegant Tanzanian decor.
+                        </p>
+                        
+                        <div class="room-features">
+                            <span class="feature"><i class="fas fa-wifi"></i> Free WiFi</span>
+                            <span class="feature"><i class="fas fa-snowflake"></i> AC</span>
+                            <span class="feature"><i class="fas fa-wine-glass"></i> Minibar</span>
+                            <span class="feature"><i class="fas fa-tv"></i> Smart TV</span>
+                            <span class="feature"><i class="fas fa-shower"></i> Rain Shower</span>
+                        </div>
+                        
+                        <div class="room-footer">
+                            <div>
+                                <span style="font-size: 0.9rem; color: var(--text-light);">Max: 2 Adults</span>
+                                <span style="margin-left: 15px; font-size: 0.9rem; color: var(--text-light);">35 m²</span>
+                            </div>
+                            <a href="contacts.html" class="btn" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Executive Suite -->
+                <div class="room-card featured fade-in">
+                    <div class="room-badge">Luxury Suite</div>
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Executive Suite">
+                    </div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div class="room-title">
+                                <h3>Executive Suite</h3>
+                                <div class="room-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="room-price">
+                                <div class="price-from">Starting from</div>
+                                <div class="price-amount">$450</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                        </div>
+                        
+                        <p class="room-description">
+                            Ultimate luxury with separate living area, private terrace with jacuzzi, and panoramic mountain views. Includes butler service and complimentary champagne.
+                        </p>
+                        
+                        <div class="room-features">
+                            <span class="feature"><i class="fas fa-hot-tub"></i> Private Jacuzzi</span>
+                            <span class="feature"><i class="fas fa-user-tie"></i> Butler Service</span>
+                            <span class="feature"><i class="fas fa-utensils"></i> Free Breakfast</span>
+                            <span class="feature"><i class="fas fa-wine-bottle"></i> Champagne</span>
+                            <span class="feature"><i class="fas fa-couch"></i> Living Room</span>
+                        </div>
+                        
+                        <div class="room-footer">
+                            <div>
+                                <span style="font-size: 0.9rem; color: var(--text-light);">Max: 2 Adults</span>
+                                <span style="margin-left: 15px; font-size: 0.9rem; color: var(--text-light);">75 m²</span>
+                            </div>
+                            <a href="contacts.html" class="btn" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Family Villa -->
+                <div class="room-card fade-in">
+                    <div class="room-badge">Family Friendly</div>
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Family Villa">
+                    </div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div class="room-title">
+                                <h3>Family Villa</h3>
+                                <div class="room-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="room-price">
+                                <div class="price-from">Starting from</div>
+                                <div class="price-amount">$380</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                        </div>
+                        
+                        <p class="room-description">
+                            Perfect for families, featuring two bedrooms, kitchenette, and private garden. Children's amenities and activities included. Spacious and comfortable.
+                        </p>
+                        
+                        <div class="room-features">
+                            <span class="feature"><i class="fas fa-bed"></i> 2 Bedrooms</span>
+                            <span class="feature"><i class="fas fa-utensils"></i> Kitchenette</span>
+                            <span class="feature"><i class="fas fa-tree"></i> Private Garden</span>
+                            <span class="feature"><i class="fas fa-child"></i> Kids Activities</span>
+                            <span class="feature"><i class="fas fa-swimming-pool"></i> Pool Access</span>
+                        </div>
+                        
+                        <div class="room-footer">
+                            <div>
+                                <span style="font-size: 0.9rem; color: var(--text-light);">Max: 4 Adults + 2 Kids</span>
+                                <span style="margin-left: 15px; font-size: 0.9rem; color: var(--text-light);">90 m²</span>
+                            </div>
+                            <a href="contacts.html" class="btn" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Safari Tent Suite -->
+                <div class="room-card fade-in">
+                    <div class="room-badge">Unique Experience</div>
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1506970845872-504d6b2d49e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Safari Tent Suite">
+                    </div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div class="room-title">
+                                <h3>Safari Tent Suite</h3>
+                                <div class="room-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                            <div class="room-price">
+                                <div class="price-from">Starting from</div>
+                                <div class="price-amount">$320</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                        </div>
+                        
+                        <p class="room-description">
+                            Luxury tented accommodation with modern amenities. Experience the romance of safari living without compromising on comfort. Includes outdoor shower.
+                        </p>
+                        
+                        <div class="room-features">
+                            <span class="feature"><i class="fas fa-campground"></i> Luxury Tent</span>
+                            <span class="feature"><i class="fas fa-shower"></i> Outdoor Shower</span>
+                            <span class="feature"><i class="fas fa-fire"></i> Fire Pit</span>
+                            <span class="feature"><i class="fas fa-binoculars"></i> Wildlife Viewing</span>
+                            <span class="feature"><i class="fas fa-moon"></i> Stargazing Deck</span>
+                        </div>
+                        
+                        <div class="room-footer">
+                            <div>
+                                <span style="font-size: 0.9rem; color: var(--text-light);">Max: 2 Adults</span>
+                                <span style="margin-left: 15px; font-size: 0.9rem; color: var(--text-light);">45 m²</span>
+                            </div>
+                            <a href="contacts.html" class="btn" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Room Comparison</h2>
+                <p>Compare features and amenities to find the perfect accommodation for your stay.</p>
+            </div>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Features</th>
+                            <th>Deluxe Mountain</th>
+                            <th>Executive Suite</th>
+                            <th>Family Villa</th>
+                            <th>Safari Tent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mountain View</td>
+                            <td class="feature-check">✓</td>
+                            <td class="feature-check">✓</td>
+                            <td class="feature-check">✓</td>
+                            <td class="feature-check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Private Balcony</td>
+                            <td class="feature-check">✓</td>
+                            <td class="feature-check">✓</td>
+                            <td class="feature-check">✓</td>
+                            <td class="feature-check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>King Size Bed</td>
+                            <td class="feature-check">✓</td>
+                            <td class="feature-check">✓</td>
+                            <td class="feature-check">✓</td>
+                            <td class="feature-check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Butler Service</td>
+                            <td>-</td>
+                            <td class="feature-check">✓</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Private Jacuzzi</td>
+                            <td>-</td>
+                            <td class="feature-check">✓</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Kitchenette</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="feature-check">✓</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Children's Amenities</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="feature-check">✓</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Outdoor Shower</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="feature-check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Free Breakfast</td>
+                            <td>-</td>
+                            <td class="feature-check">✓</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Size (m²)</td>
+                            <td>35</td>
+                            <td>75</td>
+                            <td>90</td>
+                            <td>45</td>
+                        </tr>
+                        <tr>
+                            <td>Max Guests</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>6</td>
+                            <td>2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers -->
+    <section class="offers-section" id="special-offers">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Special Offers</h2>
+                <p>Exclusive packages and promotions for an enhanced stay experience.</p>
+            </div>
+            
+            <div class="offers-grid">
+                <div class="offer-card fade-in">
+                    <div class="offer-badge">Save 20%</div>
+                    <div class="offer-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="offer-title">Honeymoon Package</h3>
+                    <p class="offer-description">Romantic getaway with champagne, couples massage, and private dinner.</p>
+                    <div class="offer-price">$799</div>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">3 nights minimum</p>
+                    <a href="contacts.html" class="btn" style="padding: 12px 30px; margin-top: 20px;">Book Package</a>
+                </div>
+                
+                <div class="offer-card fade-in">
+                    <div class="offer-badge">Free Night</div>
+                    <div class="offer-icon">
+                        <i class="fas fa-hiking"></i>
+                    </div>
+                    <h3 class="offer-title">Climber's Retreat</h3>
+                    <p class="offer-description">Pre/post Kilimanjaro climb package with spa recovery and gear storage.</p>
+                    <div class="offer-price">$1,299</div>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">7 nights + free night</p>
+                    <a href="contacts.html" class="btn" style="padding: 12px 30px; margin-top: 20px;">Book Package</a>
+                </div>
+                
+                <div class="offer-card fade-in">
+                    <div class="offer-badge">Family Deal</div>
+                    <div class="offer-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="offer-title">Family Adventure</h3>
+                    <p class="offer-description">Two connecting rooms with kids stay free and daily activities included.</p>
+                    <div class="offer-price">$1,599</div>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">5 nights for family of 4</p>
+                    <a href="contacts.html" class="btn" style="padding: 12px 30px; margin-top: 20px;">Book Package</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content fade-in">
+                <h2>Ready for Your Kilimanjaro Adventure?</h2>
+                <p>Book your stay today and experience luxury accommodation with the best views of Africa's highest peak. Our team is ready to make your stay unforgettable.</p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a href="contacts.html" class="btn">Book Your Room</a>
+                    <a href="contacts.html" class="btn btn-outline">Contact Our Team</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Boma Villa Kilimanjaro</h3>
+                    <p style="margin-bottom: 20px; opacity: 0.8;">Luxury accommodation with breathtaking views of Mount Kilimanjaro. Experience Tanzanian hospitality at its finest.</p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: var(--secondary-color); font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: var(--secondary-color); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: var(--secondary-color); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--secondary-color); font-size: 1.2rem;"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="Index.html">Home</a></li>
+                        <li><a href="rooms.html">Rooms & Rates</a></li>
+                        <li><a href="gallary.html">Gallery</a></li>
+                        <li><a href="about us.html">About Us</a></li>
+                        <li><a href="review.html">Guest Reviews</a></li>
+                        <li><a href="contacts.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Moshi, Kilimanjaro Region</li>
+                        <li><i class="fas fa-phone" style="margin-right: 10px;"></i> +255 123 456 789</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> info@bomavilla.com</li>
+                        <li><i class="fas fa-clock" style="margin-right: 10px;"></i> 24/7 Reception</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Boma Villa Kilimanjaro. All rights reserved. | Designed for unforgettable experiences</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set active navigation link
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+            
+            // Window resize handler
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navMenu.style.display = 'flex';
+                } else {
+                    navMenu.style.display = 'none';
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 100,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements for animation
+            document.querySelectorAll('.room-card, .offer-card, .section-title').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Room card hover effects enhancement
+            const roomCards = document.querySelectorAll('.room-card');
+            roomCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+            
+            // Price animation on hover
+            const priceElements = document.querySelectorAll('.price-amount');
+            priceElements.forEach(price => {
+                price.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.1)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                price.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Add booking modal functionality (simplified)
+            const bookButtons = document.querySelectorAll('.room-footer .btn, .offer-card .btn');
+            bookButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === 'contact.html') {
+                        // In a real implementation, this would pass room details to booking form
+                        const roomTitle = this.closest('.room-card') ? 
+                            this.closest('.room-card').querySelector('.room-title h3').textContent :
+                            this.closest('.offer-card').querySelector('.offer-title').textContent;
+                        
+                        // Store room selection in localStorage for contact page
+                        localStorage.setItem('selectedRoom', roomTitle);
+                    }
+                });
+            });
+            
+            // Initialize mobile menu
+            if (window.innerWidth <= 768) {
+                navMenu.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

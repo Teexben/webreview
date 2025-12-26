@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Reviews - Boma Villa Kilimanjaro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --primary-color: #1a472a;
+            --secondary-color: #d4af37;
+            --accent-color: #8b4513;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --background-light: #f8f5f0;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-Index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-link.active {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 70px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-padding {
+            padding: 5rem 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #b8941f;
+            transform: translateY(-2px);
+        }
+        
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Reviews Page Specific Styles */
+        .rating-summary {
+            text-align: center;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .overall-rating {
+            font-size: 4rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .stars {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .rating-bars {
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+        
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .rating-label {
+            width: 80px;
+            font-weight: 500;
+        }
+        
+        .rating-progress {
+            flex: 1;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 1rem;
+        }
+        
+        .rating-fill {
+            height: 100%;
+            background-color: var(--secondary-color);
+            border-radius: 4px;
+        }
+        
+        .rating-count {
+            width: 50px;
+            text-align: right;
+            font-weight: 500;
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .review-card {
+            padding: 2rem;
+            height: 100%;
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .review-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+        
+        .review-info h4 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .review-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .review-content {
+            margin-bottom: 1.5rem;
+        }
+        
+        .review-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            background-color: var(--background-light);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+        }
+        
+        .review-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 4rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .star-rating-input {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .star-rating-input i {
+            font-size: 1.5rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .star-rating-input i:hover,
+        .star-rating-input i.active {
+            color: var(--secondary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .review-form {
+                padding: 2rem;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .rating-summary {
+                padding: 2rem 1rem;
+            }
+            
+            .review-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="Index.html" class="logo">Boma Villa Kilimanjaro</a>
+            <ul class="nav-menu">
+                <li><a href="Index.html" class="nav-link">Home</a></li>
+                <li><a href="rooms.html" class="nav-link">Rooms & Rates</a></li>
+                <li><a href="gallary.html" class="nav-link">Gallery</a></li>
+                <li><a href="contacts.html" class="nav-link">Contact</a></li>
+                <li><a href="about us.html" class="nav-link">About Us</a></li>
+                <li><a href="review.html" class="nav-link active">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Guest Reviews</h1>
+            <p style="font-size: 1.2rem;">See what our guests say about their experience</p>
+        </div>
+    </section>
+
+    <!-- Reviews Content -->
+    <section class="section-padding">
+        <div class="container">
+            <!-- Rating Summary -->
+            <div class="rating-summary">
+                <div class="overall-rating">4.8</div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">Based on 247 verified guest reviews</p>
+                
+                <div class="rating-bars">
+                    <div class="rating-bar">
+                        <div class="rating-label">Excellent</div>
+                        <div class="rating-progress">
+                            <div class="rating-fill" style="width: 85%;"></div>
+                        </div>
+                        <div class="rating-count">85%</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="rating-label">Very Good</div>
+                        <div class="rating-progress">
+                            <div class="rating-fill" style="width: 12%;"></div>
+                        </div>
+                        <div class="rating-count">12%</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="rating-label">Average</div>
+                        <div class="rating-progress">
+                            <div class="rating-fill" style="width: 2%;"></div>
+                        </div>
+                        <div class="rating-count">2%</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="rating-label">Poor</div>
+                        <div class="rating-progress">
+                            <div class="rating-fill" style="width: 1%;"></div>
+                        </div>
+                        <div class="rating-count">1%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Grid -->
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 3rem;">Recent Guest Experiences</h2>
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="card review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">SM</div>
+                        <div class="review-info">
+                            <h4>Sarah M.</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="review-date">March 2024 • Honeymoon</div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Absolutely breathtaking! The view of Kilimanjaro from our room was unforgettable. 
+                        The staff went above and beyond to make our honeymoon special. The food was exceptional 
+                        and the sunset views from the infinity pool are something we'll never forget."</p>
+                    </div>
+                    <div class="review-tags">
+                        <span class="tag">Mountain View</span>
+                        <span class="tag">Romantic</span>
+                        <span class="tag">Exceptional Service</span>
+                    </div>
+                </div>
+                
+                <!-- Review 2 -->
+                <div class="card review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">JK</div>
+                        <div class="review-info">
+                            <h4>James K.</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="review-date">February 2024 • Adventure Travel</div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Perfect base for our Kilimanjaro climb. The team helped organize our trek seamlessly. 
+                        After 7 days on the mountain, returning to the luxury of Boma Villa was heaven. The spa 
+                        treatments helped our recovery immensely. Can't recommend enough!"</p>
+                    </div>
+                    <div class="review-tags">
+                        <span class="tag">Climbing Base</span>
+                        <span class="tag">Luxury</span>
+                        <span class="tag">Spa</span>
+                    </div>
+                </div>
+                
+                <!-- Review 3 -->
+                <div class="card review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">ML</div>
+                        <div class="review-info">
+                            <h4>Maria L.</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="review-date">January 2024 • Family Vacation</div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Beautiful property with authentic Tanzanian design. Our kids loved the pool and 
+                        the cultural activities organized by the staff. The family villa was spacious and 
+                        comfortable. Only minor issue was slow WiFi in our room, but everything else was perfect."</p>
+                    </div>
+                    <div class="review-tags">
+                        <span class="tag">Family Friendly</span>
+                        <span class="tag">Cultural Experience</span>
+                        <span class="tag">Pool</span>
+                    </div>
+                </div>
+                
+                <!-- Review 4 -->
+                <div class="card review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">RW</div>
+                        <div class="review-info">
+                            <h4>Robert W.</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="review-date">December 2023 • Anniversary</div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Celebrated our 25th anniversary here and it was magical. The staff arranged a private 
+                        dinner with traditional Tanzanian music. The attention to detail was incredible. We've 
+                        traveled all over the world, and this is one of our top 3 experiences ever."</p>
+                    </div>
+                    <div class="review-tags">
+                        <span class="tag">Special Occasion</span>
+                        <span class="tag">Romantic Dinner</span>
+                        <span class="tag">5-Star Service</span>
+                    </div>
+                </div>
+                
+                <!-- Review 5 -->
+                <div class="card review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">CP</div>
+                        <div class="review-info">
+                            <h4>Chloe P.</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="review-date">November 2023 • Solo Travel</div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>"As a solo female traveler, I felt completely safe and welcomed. The staff were 
+                        incredibly helpful with organizing day trips. The food was outstanding - best vegetarian 
+                        options I've had in Tanzania. The sunset view from my balcony was worth every penny."</p>
+                    </div>
+                    <div class="review-tags">
+                        <span class="tag">Solo Travel</span>
+                        <span class="tag">Vegetarian Friendly</span>
+                        <span class="tag">Sunset Views</span>
+                    </div>
+                </div>
+                
+                <!-- Review 6 -->
+                <div class="card review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">TM</div>
+                        <div class="review-info">
+                            <h4>Thomas M.</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="review-date">October 2023 • Business & Leisure</div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Combined business meetings with a short vacation. The conference facilities were 
+                        excellent and the WiFi in common areas was reliable. After work, the transition to 
+                        relaxation was seamless. The massage at the spa was one of the best I've ever had."</p>
+                    </div>
+                    <div class="review-tags">
+                        <span class="tag">Business Facilities</span>
+                        <span class="tag">Spa</span>
+                        <span class="tag">Reliable WiFi</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Form -->
+            <div class="review-form">
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">Share Your Experience</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">
+                    Stayed with us recently? We'd love to hear about your experience at Boma Villa Kilimanjaro.
+                </p>
+                
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label for="reviewName">Your Name *</label>
+                        <input type="text" id="reviewName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewEmail">Email Address *</label>
+                        <input type="email" id="reviewEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewStay">When did you stay with us? *</label>
+                        <input type="month" id="reviewStay" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Your Rating *</label>
+                        <div class="star-rating-input" id="starRating">
+                            <i class="far fa-star" data-value="1"></i>
+                            <i class="far fa-star" data-value="2"></i>
+                            <i class="far fa-star" data-value="3"></i>
+                            <i class="far fa-star" data-value="4"></i>
+                            <i class="far fa-star" data-value="5"></i>
+                        </div>
+                        <input type="hidden" id="ratingValue" name="rating" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewTitle">Review Title</label>
+                        <input type="text" id="reviewTitle" placeholder="Summarize your experience">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewText">Your Review *</label>
+                        <textarea id="reviewText" required placeholder="Tell us about your stay..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewTrip">Type of Trip</label>
+                        <select id="reviewTrip">
+                            <option value="">Select trip type</option>
+                            <option value="honeymoon">Honeymoon</option>
+                            <option value="family">Family Vacation</option>
+                            <option value="adventure">Adventure Travel</option>
+                            <option value="business">Business</option>
+                            <option value="solo">Solo Travel</option>
+                            <option value="couple">Couple's Getaway</option>
+                        </select>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button type="submit" class="btn" style="width: 200px;">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@bomavillakilimanjaro.com</p>
+                    <p>Phone: +255 123 456 789</p>
+                    <p>Address: Moshi, Kilimanjaro Region, Tanzania</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="rooms.html" style="color: var(--white); text-decoration: none;">Rooms & Rates</a></li>
+                        <li><a href="gallary.html" style="color: var(--white); text-decoration: none;">Gallery</a></li>
+                        <li><a href="contacts.html" style="color: var(--white); text-decoration: none;">Contact</a></li>
+                        <li><a href="about us.html" style="color: var(--white); text-decoration: none;">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <p>Follow our journey on social media</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" style="color: var(--white); text-decoration: none;">Facebook</a>
+                        <a href="#" style="color: var(--white); text-decoration: none;">Instagram</a>
+                        <a href="#" style="color: var(--white); text-decoration: none;">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Boma Villa Kilimanjaro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set active navigation link
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Star Rating System
+            const stars = document.querySelectorAll('#starRating i');
+            const ratingValue = document.getElementById('ratingValue');
+            let currentRating = 0;
+            
+            stars.forEach(star => {
+                star.addEventListener('mouseover', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    highlightStars(value);
+                });
+                
+                star.addEventListener('click', function() {
+                    currentRating = parseInt(this.getAttribute('data-value'));
+                    ratingValue.value = currentRating;
+                    highlightStars(currentRating);
+                });
+            });
+            
+            document.querySelector('#starRating').addEventListener('mouseleave', function() {
+                highlightStars(currentRating);
+            });
+            
+            function highlightStars(count) {
+                stars.forEach((star, Index) => {
+                    if (Index < count) {
+                        star.classList.remove('far');
+                        star.classList.add('fas', 'active');
+                    } else {
+                        star.classList.remove('fas', 'active');
+                        star.classList.add('far');
+                    }
+                });
+            }
+            
+            // Review Form Submission
+            const reviewForm = document.getElementById('reviewForm');
+            reviewForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate rating
+                if (currentRating === 0) {
+                    alert('Please select a star rating');
+                    return;
+                }
+                
+                // Get form data
+                const formData = {
+                    name: document.getElementById('reviewName').value,
+                    email: document.getElementById('reviewEmail').value,
+                    stayDate: document.getElementById('reviewStay').value,
+                    rating: currentRating,
+                    title: document.getElementById('reviewTitle').value,
+                    review: document.getElementById('reviewText').value,
+                    tripType: document.getElementById('reviewTrip').value
+                };
+                
+                // In a real application, you would send this to a server
+                // For now, we'll show a success message
+                alert('Thank you for your review! Your feedback is valuable to us. In a real application, this would be submitted to our database.');
+                
+                // Reset form
+                reviewForm.reset();
+                currentRating = 0;
+                ratingValue.value = '';
+                highlightStars(0);
+            });
+            
+            // Animate rating bars on scroll
+            function animateRatingBars() {
+                const ratingBars = document.querySelectorAll('.rating-fill');
+                ratingBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    
+                    setTimeout(() => {
+                        bar.style.transition = 'width 1.5s ease-in-out';
+                        bar.style.width = width;
+                    }, 300);
+                });
+            }
+            
+            // Trigger animation when rating section comes into view
+            const ratingSummary = document.querySelector('.rating-summary');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateRatingBars();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            if (ratingSummary) {
+                observer.observe(ratingSummary);
+            }
+            
+            // Review cards hover effect
+            const reviewCards = document.querySelectorAll('.review-card');
+            reviewCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.boxShadow = '0 15px 35px rgba(0,0,0,0.15)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

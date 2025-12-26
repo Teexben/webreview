@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Boma Villa Kilimanjaro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --primary-color: #1a472a;
+            --secondary-color: #d4af37;
+            --accent-color: #8b4513;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --background-light: #f8f5f0;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-Index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-link.active {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 70px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-padding {
+            padding: 5rem 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #b8941f;
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Contact Page Specific Styles */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            padding: 2rem 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .contact-form-container {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .map-container {
+            margin-top: 4rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .map-placeholder {
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-color), #0d351f);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .faq-section {
+            margin-top: 5rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            background-color: var(--white);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: var(--white);
+        }
+        
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-toggle {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-toggle.active {
+            transform: rotate(45deg);
+        }
+        
+        .emergency-contact {
+            background: linear-gradient(135deg, var(--primary-color), #0d351f);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .contact-form-container {
+                padding: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .contact-form-container {
+                padding: 1.5rem;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="Index.html" class="logo">Boma Villa Kilimanjaro</a>
+            <ul class="nav-menu">
+                <li><a href="Index.html" class="nav-link">Home</a></li>
+                <li><a href="rooms.html" class="nav-link">Rooms & Rates</a></li>
+                <li><a href="gallary.html" class="nav-link">Gallery</a></li>
+                <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                <li><a href="about us.html" class="nav-link">About Us</a></li>
+                <li><a href="review.html" class="nav-link">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p style="font-size: 1.2rem;">Get in touch with Boma Villa Kilimanjaro</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Get in Touch</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-light);">
+                        We're here to help you plan your perfect Kilimanjaro experience. 
+                        Contact us for reservations, inquiries, or any assistance you may need.
+                    </p>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Address</h4>
+                            <p>Boma Villa Kilimanjaro<br>
+                            Moshi, Kilimanjaro Region<br>
+                            Tanzania, East Africa</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone Numbers</h4>
+                            <p>Reservations: +255 123 456 789<br>
+                            General Inquiries: +255 987 654 321<br>
+                            WhatsApp: +255 123 456 789</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email Addresses</h4>
+                            <p>Reservations: reservations@bomavilla.com<br>
+                            General: info@bomavilla.com<br>
+                            Groups & Events: events@bomavilla.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Business Hours</h4>
+                            <p>Reception: 24/7<br>
+                            Reservations Desk: 6:00 AM - 10:00 PM (EAT)<br>
+                            Restaurant: 6:30 AM - 11:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 3rem;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Social Media</h3>
+                        <div style="display: flex; gap: 1rem;">
+                            <a href="#" style="width: 40px; height: 40px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" style="width: 40px; height: 40px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" style="width: 40px; height: 40px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" style="width: 40px; height: 40px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+                                <i class="fab fa-tripadvisor"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Send us a Message</h2>
+                    
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="reservation">Room Reservation</option>
+                                <option value="availability">Availability Inquiry</option>
+                                <option value="rates">Rates & Packages</option>
+                                <option value="events">Events & Conferences</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other Inquiry</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="checkin">Expected Check-in Date</label>
+                            <input type="date" id="checkin">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nights">Number of Nights</label>
+                            <select id="nights">
+                                <option value="">Select</option>
+                                <option value="1">1 Night</option>
+                                <option value="2">2 Nights</option>
+                                <option value="3">3 Nights</option>
+                                <option value="4">4 Nights</option>
+                                <option value="5">5+ Nights</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" required placeholder="Please provide details about your inquiry..."></textarea>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button type="submit" class="btn" style="width: 200px;">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Map Section -->
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <h3>Our Location</h3>
+                    <p style="max-width: 500px; margin: 1rem auto;">
+                        Located in Moshi at the foothills of Mount Kilimanjaro, 
+                        45 minutes from Kilimanjaro International Airport (JRO)
+                    </p>
+                    <a href="https://maps.app.goo.gl/5AcNPMiL8Jse3Mpv6" target="_blank" class="btn" style="background-color: var(--secondary-color); color: var(--primary-color); margin-top: 1rem;">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 3rem;">Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What is your cancellation policy?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer flexible cancellation policies. Cancellations made 7 days or more before check-in receive a full refund. 
+                        Between 3-7 days before check-in, we charge 50% of the total booking amount. 
+                        Cancellations within 72 hours of check-in are non-refundable.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you offer airport transfers?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we provide airport transfer services from Kilimanjaro International Airport (JRO) 
+                        at an additional charge. Please inform us of your flight details at least 48 hours in advance. 
+                        Our driver will meet you at the arrivals hall with a signboard.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What payment methods do you accept?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept Visa, MasterCard, American Express, bank transfers, and cash (USD, EUR, TZS). 
+                        A 30% deposit is required to confirm your reservation, with the balance due upon arrival.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you accommodate dietary restrictions?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. Our restaurant can accommodate various dietary needs including vegetarian, 
+                        vegan, gluten-free, and halal options. Please inform us of any dietary restrictions 
+                        when making your reservation.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Emergency Contact -->
+            <div class="emergency-contact">
+                <h3 style="color: var(--secondary-color); margin-bottom: 1rem;"><i class="fas fa-phone-alt"></i> Emergency Contact</h3>
+                <p style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">+255 765 432 109</p>
+                <p>Available 24/7 for urgent assistance</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@bomavillakilimanjaro.com</p>
+                    <p>Phone: +255 123 456 789</p>
+                    <p>Address: Moshi, Kilimanjaro Region, Tanzania</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="rooms.html" style="color: var(--white); text-decoration: none;">Rooms & Rates</a></li>
+                        <li><a href="gallary.html" style="color: var(--white); text-decoration: none;">Gallery</a></li>
+                        <li><a href="contacts.html" style="color: var(--white); text-decoration: none;">Contact</a></li>
+                        <li><a href="about us.html" style="color: var(--white); text-decoration: none;">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <p>Follow our journey on social media</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" style="color: var(--white); text-decoration: none;">Facebook</a>
+                        <a href="#" style="color: var(--white); text-decoration: none;">Instagram</a>
+                        <a href="#" style="color: var(--white); text-decoration: none;">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Boma Villa Kilimanjaro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set active navigation link
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Set minimum date for check-in to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('checkin').min = today;
+            
+            // Contact Form Submission
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    subject: document.getElementById('subject').value,
+                    checkin: document.getElementById('checkin').value,
+                    nights: document.getElementById('nights').value,
+                    message: document.getElementById('message').value
+                };
+                
+                // Simple validation
+                if (!formData.firstName || !formData.lastName || !formData.email || !formData.subject || !formData.message) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                // In a real application, you would send this to a server
+                // For now, we'll show a success message
+                alert('Thank you for your message! We will respond within 24 hours. In a real application, this would be submitted to our system.');
+                
+                // Reset form
+                contactForm.reset();
+                document.getElementById('checkin').min = today;
+            });
+            
+            // FAQ Toggle Function
+            window.toggleFAQ = function(element) {
+                const answer = element.nextElementSibling;
+                const toggle = element.querySelector('.faq-toggle');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-answer').forEach(item => {
+                    if (item !== answer && item.classList.contains('active')) {
+                        item.classList.remove('active');
+                        item.previousElementSibling.querySelector('.faq-toggle').classList.remove('active');
+                    }
+                });
+                
+                // Toggle current FAQ
+                answer.classList.toggle('active');
+                toggle.classList.toggle('active');
+            };
+            
+            // Social media icons hover effect
+            const socialIcons = document.querySelectorAll('.contact-info a');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'var(--secondary-color)';
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                icon.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'var(--primary-color)';
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Form input focus effects
+            const formInputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
+            formInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateY(-2px)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Initialize today's date in check-in field as placeholder
+            const checkinField = document.getElementById('checkin');
+            checkinField.placeholder = today;
+            
+            // Phone number formatting
+            const phoneField = document.getElementById('phone');
+            phoneField.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 0) {
+                    value = '+255 ' + value;
+                }
+                e.target.value = value;
+            });
+        });
+    </script>
+</body>
+</html>
